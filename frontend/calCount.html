@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>NutriSnap</title>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="bootstrap.min.css"/>
+<style>
+  #chartContainer {
+    margin: 3%;
+  }
+
+  </style>
+
+<script>
+
+// const Http = new XMLHttpRequest();
+// const url='https://jsonplaceholder.typicode.com/posts';
+
+fetch( "https://afternoon-forest-51543.herokuapp.com/food", {method: "POST", mode: "cors"})
+.then(response =>
+  response.json()
+).then(json =>
+  window.onload = function () {
+
+  var chart = new CanvasJS.Chart("chartContainer", {
+  	animationEnabled: true,
+
+  	title:{
+  		text:"Total Nutrients for the Day"
+  	},
+  	axisX:{
+  		interval: 1
+  	},
+  	axisY2:{
+  		interlacedColor: "rgba(1,77,101,.2)",
+  		gridColor: "rgba(1,77,101,.1)",
+  		title: "% Intake",
+      maximum: 100
+  	},
+  	data: [{
+  		type: "bar",
+  		name: "companies",
+  		axisYType: "secondary",
+      yValueFormatString: "#,##0\"%\"",
+  		color: "#014D65",
+  		dataPoints: [
+  			{ y: json.calories/2000 * 100, label: "Calories" },
+  			{ y: json.protein/50 * 100, label: "Protein" },
+  			{ y: json.carbohydrate/300 * 100, label: "Carbohydrates" },
+  			{ y: json.total_fat/65 * 100, label: "Total Fat" },
+  			{ y: json.sodium/2400 * 100, label: "Sodium" },
+  			{ y: json.fiber/25 * 100, label: "Fiber" },
+  			{ y: json.sugar/50 * 100, label: "Sugar" }
+  		]
+  	}]
+  });
+
+  chart.render();
+}
+)
+// Http.onreadystatechange=(e)=>{
+// console.log(Http)
+// }
+// Http.open("POST", "https://afternoon-forest-51543.herokuapp.com/food");
+// Http.send();
+
+
+// window.onload = function () {
+//
+// var chart = new CanvasJS.Chart("chartContainer", {
+// 	animationEnabled: true,
+//
+// 	title:{
+// 		text:"Total Nutrients for the Day"
+// 	},
+// 	axisX:{
+// 		interval: 1
+// 	},
+// 	axisY2:{
+// 		interlacedColor: "rgba(1,77,101,.2)",
+// 		gridColor: "rgba(1,77,101,.1)",
+// 		title: "% Intake",
+//     maximum: 100
+// 	},
+// 	data: [{
+// 		type: "bar",
+// 		name: "companies",
+// 		axisYType: "secondary",
+//     yValueFormatString: "#,##0\"%\"",
+// 		color: "#014D65",
+// 		dataPoints: [
+// 			{ y: 34, label: "Calories" },
+// 			{ y: 76, label: "Protein" },
+// 			{ y: 153, label: "Carbohydrates" },
+// 			{ y: 91, label: "Total Fat" },
+// 			{ y: 78, label: "Sodium" },
+// 			{ y: 77, label: "Fiber" },
+// 			{ y: 95, label: "Sugar" }
+// 		]
+// 	}]
+// });
+// chart.render();
+
+</script>
+<script src="bootstrap.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">NutriSnap</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Total<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">History</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div id="chartContainer" style="height: 500px; width: 75%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
