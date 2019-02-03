@@ -1,0 +1,25 @@
+{
+  "name": "unitingdust/examples-twilio",
+  "version": "0.0.0",
+  "description": "Basic Twilio Messaging Hub",
+  "author": "UnitingDust",
+  "main": "functions/__main__.js",
+  "dependencies": {
+    "lib": "^3.0.1",
+    "request": "^2.81.0",
+    "twilio": "^3.3.0",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "private": true,
+  "stdlib": {
+    "build": "faaslang",
+    "name": "unitingdust/examples-twilio",
+    "timeout": 10000,
+    "publish": true,
+    "personalize": {
+      "keys": [],
+      "user": []
+    },
+    "source": "@examples/twilio/0.0.2"
+  }
+}
